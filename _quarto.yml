@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "C3G Training Catalog"
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+
+      - href: workshops.qmd
+        text: Workshops
+
+      - href: contribute.qmd
+        text: Contribute
+
+  page-footer:
+    center: |
+      © C3G Training Program
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+

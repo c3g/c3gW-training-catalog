@@ -1,0 +1,21 @@
+---
+title: Contribute
+---
+
+# Contributing
+
+We welcome contributions from C3G trainers and collaborators.
+
+## Principles
+
+- One maintainer per workshop
+- Shared ownership through the C3G organization
+- Peer review through pull requests
+- Sustainable and reusable teaching materials
+
+## New workshop workflow
+
+1. Create a workshop repository.
+2. Assign a maintainer.
+3. Add workshop metadata.
+4. Add the workshop to the Hub.

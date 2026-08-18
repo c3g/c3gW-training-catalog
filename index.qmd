@@ -1,0 +1,19 @@
+---
+title: "C3G training catalog"
+---
+
+# C3G Training Catalog
+
+Welcome to the C3G Training Catalog.
+
+This website serves as the central catalog of workshops, learning materials, and training resources developed and maintained by C3G.
+
+## What you'll find here
+
+- Workshop catalog
+- Learning resources
+- Contribution guidelines
+
+## Current status
+
+The catalog is being developed and workshop pages will be added progressively.
