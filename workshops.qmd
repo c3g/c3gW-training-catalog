@@ -1,0 +1,29 @@
+---
+title: "Workshops"
+---
+
+## Introduction to ...
+
+Learn the basics of ...
+
+- 🌐 Website: <>
+- 💻 GitHub: <>
+
+## Introduction to ...
+
+Introduction to ...
+
+- 🌐 Website: <>
+- 💻 GitHub: <>
+
+##  Analysis
+
+Analysis workflow ...
+
+- 🌐 Website: <>
+- 💻 GitHub: <>
+
+
+::: {.content-visible}
+<div style="margin-bottom: 1000px;"></div>
+:::

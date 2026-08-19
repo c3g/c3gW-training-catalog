@@ -19,3 +19,8 @@ We welcome contributions from C3G trainers and collaborators.
 2. Assign a maintainer.
 3. Add workshop metadata.
 4. Add the workshop to the Hub.
+
+
+::: {.content-visible}
+<div style="margin-bottom: 1000px;"></div>
+:::

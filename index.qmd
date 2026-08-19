@@ -17,3 +17,7 @@ This website serves as the central catalog of workshops, learning materials, and
 ## Current status
 
 The catalog is being developed and workshop pages will be added progressively.
+
+::: {.content-visible}
+<div style="margin-bottom: 1000px;"></div>
+:::

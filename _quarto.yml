@@ -3,7 +3,6 @@ project:
 
 website:
   title: "C3G Training Catalog"
-
   navbar:
     left:
       - href: index.qmd
@@ -14,14 +13,36 @@ website:
 
       - href: contribute.qmd
         text: Contribute
-
+    background: "#1434c1"
+    foreground: white
+    logo: images/C3G-Logo-Colour-EN_wh.png
   page-footer:
     center: |
       © C3G Training Program
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
     toc: true
-
-
+    css: styles.css
+    sidebar:
+      contents: auto
+    toc-location: left
+    toc-expand: 4
+    toc-depth: 4
+    other-links:
+      - text: C3G website
+        icon: globe
+        href: https://computationalgenomics.ca/
+      - text: GitHub
+        icon: github
+        href: https://github.com/c3g
+      - text: LinkedIn
+        icon: linkedin
+        href: https://www.linkedin.com/company/canadian-centre-for-computational-genomics/posts/?feedView=all
+    grid:
+      sidebar-width: 300px
+      body-width: 1200px
+      margin-width: 100px
+      gutter-width: 5rem
