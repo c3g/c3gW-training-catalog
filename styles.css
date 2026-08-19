@@ -1,0 +1,60 @@
+/* styles.css */
+
+/* ===== Active selection (YML sidebar) ===== */
+
+#quarto-sidebar a.active {
+    color: black!important;
+    background-color: #d0d2d4;
+}
+
+/* make selected element in toc smooth */
+.sidebar nav[role="doc-toc"] a {
+    display: block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* make selected element in toc smooth and chage to color*/
+.sidebar nav[role="doc-toc"] a:hover {
+    background-color: #e6f2ff;
+    color: #000;
+}
+
+/* style of title of toc */
+.sidebar nav[role="doc-toc"] h2 {
+    margin-bottom: 10px;
+    font-weight: 800;
+    border-bottom: 2px solid  #1434c1; 
+}
+
+/* -------------------------------------*/
+/* change logo position in the sidebar */
+.navbar-brand {
+    order: 2;
+    margin-left: 70px;
+}
+
+.navbar-logo {
+    max-height: 50px !important;
+    margin-left: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
