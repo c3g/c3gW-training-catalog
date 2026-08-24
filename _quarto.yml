@@ -11,6 +11,9 @@ website:
       - href: workshops.qmd
         text: Workshops
 
+      - href: tutorials.qmd
+        text: Tutorials
+
       - href: contribute.qmd
         text: Contribute
     background: "#1434c1"
