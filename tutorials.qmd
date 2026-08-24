@@ -1,0 +1,23 @@
+---
+title: "Tutorials"
+---
+
+## Cancer
+
+1. Introduction to ...
+2. Analysis workflow ...
+
+## RNA-seq
+
+1. Introduction to ...
+2. Analysis workflow ...
+
+##  Variant calling
+ 
+1. Introduction to ...
+2. Analysis workflow ...
+
+
+::: {.content-visible}
+<div style="margin-bottom: 1000px;"></div>
+:::
