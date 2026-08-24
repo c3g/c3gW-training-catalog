@@ -1,31 +1,52 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "tutorials.html",
+    "href": "tutorials.html",
+    "title": "Tutorials",
     "section": "",
-    "text": "About this site"
+    "text": "Introduction to …\nAnalysis workflow …"
   },
   {
-    "objectID": "contribute.html",
-    "href": "contribute.html",
-    "title": "Contribute",
+    "objectID": "tutorials.html#cancer",
+    "href": "tutorials.html#cancer",
+    "title": "Tutorials",
     "section": "",
-    "text": "We welcome contributions from C3G trainers and collaborators.\n\n\n\nOne maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials\n\n\n\n\n\nCreate a workshop repository.\nAssign a maintainer.\nAdd workshop metadata.\nAdd the workshop to the Hub."
+    "text": "Introduction to …\nAnalysis workflow …"
   },
   {
-    "objectID": "contribute.html#principles",
-    "href": "contribute.html#principles",
-    "title": "Contribute",
-    "section": "",
-    "text": "One maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials"
+    "objectID": "tutorials.html#rna-seq",
+    "href": "tutorials.html#rna-seq",
+    "title": "Tutorials",
+    "section": "RNA-seq",
+    "text": "RNA-seq\n\nIntroduction to …\nAnalysis workflow …"
   },
   {
-    "objectID": "contribute.html#new-workshop-workflow",
-    "href": "contribute.html#new-workshop-workflow",
-    "title": "Contribute",
+    "objectID": "tutorials.html#variant-calling",
+    "href": "tutorials.html#variant-calling",
+    "title": "Tutorials",
+    "section": "Variant calling",
+    "text": "Variant calling\n\nIntroduction to …\nAnalysis workflow …"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "C3G training catalog",
     "section": "",
-    "text": "Create a workshop repository.\nAssign a maintainer.\nAdd workshop metadata.\nAdd the workshop to the Hub."
+    "text": "Welcome to the C3G Training Catalog.\nThis website serves as the central catalog of workshops, learning materials, and training resources developed and maintained by C3G.\n\n\n\nWorkshop catalog\nLearning resources\nContribution guidelines\n\n\n\n\nThe catalog is being developed and workshop pages will be added progressively."
+  },
+  {
+    "objectID": "index.html#what-youll-find-here",
+    "href": "index.html#what-youll-find-here",
+    "title": "C3G training catalog",
+    "section": "",
+    "text": "Workshop catalog\nLearning resources\nContribution guidelines"
+  },
+  {
+    "objectID": "index.html#current-status",
+    "href": "index.html#current-status",
+    "title": "C3G training catalog",
+    "section": "",
+    "text": "The catalog is being developed and workshop pages will be added progressively."
   },
   {
     "objectID": "workshops.html",
@@ -56,24 +77,31 @@
     "text": "Analysis\nAnalysis workflow …\n\n🌐 Website: &lt;&gt;\n💻 GitHub: &lt;&gt;"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "C3G training catalog",
+    "objectID": "contribute.html",
+    "href": "contribute.html",
+    "title": "Contribute",
     "section": "",
-    "text": "Welcome to the C3G Training Catalog.\nThis website serves as the central catalog of workshops, learning materials, and training resources developed and maintained by C3G.\n\n\n\nWorkshop catalog\nLearning resources\nContribution guidelines\n\n\n\n\nThe catalog is being developed and workshop pages will be added progressively."
+    "text": "We welcome contributions from C3G trainers and collaborators.\n\n\n\nOne maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials\n\n\n\n\n\nCreate a workshop repository.\nAssign a maintainer.\nAdd workshop metadata.\nAdd the workshop to the Hub."
   },
   {
-    "objectID": "index.html#what-youll-find-here",
-    "href": "index.html#what-youll-find-here",
-    "title": "C3G training catalog",
+    "objectID": "contribute.html#principles",
+    "href": "contribute.html#principles",
+    "title": "Contribute",
     "section": "",
-    "text": "Workshop catalog\nLearning resources\nContribution guidelines"
+    "text": "One maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials"
   },
   {
-    "objectID": "index.html#current-status",
-    "href": "index.html#current-status",
-    "title": "C3G training catalog",
+    "objectID": "contribute.html#new-workshop-workflow",
+    "href": "contribute.html#new-workshop-workflow",
+    "title": "Contribute",
     "section": "",
-    "text": "The catalog is being developed and workshop pages will be added progressively."
+    "text": "Create a workshop repository.\nAssign a maintainer.\nAdd workshop metadata.\nAdd the workshop to the Hub."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
   }
 ]
