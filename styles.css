@@ -41,6 +41,173 @@
     margin-left: 60px;
 }
 
+/* Workshops index */
+.workshop-index-controls {
+    display: grid;
+    gap: 8px;
+    max-width: 640px;
+    margin: 24px 0 12px;
+}
+
+.workshop-index-controls label {
+    font-weight: 700;
+}
+
+.workshop-index-controls input {
+    border: 1px solid #c6ced8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.98rem;
+}
+
+.workshop-topic-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 16px;
+}
+
+.workshop-topic-button {
+    border: 1px solid #c5d4eb;
+    background: #f5f9ff;
+    color: #1434c1;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.workshop-topic-button:hover {
+    background: #eaf2ff;
+}
+
+.workshop-topic-button.is-active {
+    background: #1434c1;
+    border-color: #1434c1;
+    color: #ffffff;
+}
+
+/* Partner section topic buttons use a distinct color palette */
+#partnerWorkshopTopicFilters .workshop-topic-button {
+    border: 1px solid #4b4465;
+    background: #eceaf2;
+    color: #4b4465;
+}
+
+#partnerWorkshopTopicFilters .workshop-topic-button:hover {
+    background: #e1ddea;
+}
+
+#partnerWorkshopTopicFilters .workshop-topic-button.is-active {
+    background: #4b4465;
+    border-color: #4b4465;
+    color: #ffffff;
+}
+
+/* Partner section card titles and tags use matching gray-blue colors */
+#partnerWorkshopList .workshop-card h3 a {
+    color: #4b4465;
+}
+
+#partnerWorkshopList .workshop-card h3 a:hover {
+    color: #3f3957;
+}
+
+#partnerWorkshopList .workshop-tag {
+    background: #f0eef5;
+    color: #4b4465;
+    border-color: #d6d0e0;
+}
+
+#partnerWorkshopList .workshop-tag-empty {
+    background: #f3f1f6;
+    color: #6a647a;
+    border-color: #ddd8e7;
+}
+
+.workshop-index-status {
+    margin: 6px 0 18px;
+    color: #425466;
+    font-size: 0.95rem;
+}
+
+.workshop-index-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+.workshop-card {
+    border: 1px solid #dce3eb;
+    border-radius: 12px;
+    background: #ffffff;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(17, 24, 39, 0.06);
+}
+
+.workshop-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+}
+
+.workshop-card h3 a {
+    color: #1434c1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.workshop-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.workshop-card p {
+    margin: 0 0 12px;
+    color: #425466;
+}
+
+.workshop-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 12px;
+}
+
+.workshop-tag {
+    background: #eef4ff;
+    color: #1434c1;
+    border: 1px solid #d9e4ff;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 5px 10px;
+    text-transform: lowercase;
+}
+
+.workshop-tag-empty {
+    color: #59697a;
+    background: #f4f6f8;
+    border-color: #dde3ea;
+}
+
+.workshop-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: #4c6271;
+}
+
+.workshop-meta a {
+    color: #1636b3;
+    text-decoration: none;
+}
+
+.workshop-meta a:hover {
+    text-decoration: underline;
+}
+
 
 
 

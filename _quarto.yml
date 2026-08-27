@@ -1,6 +1,13 @@
 project:
   type: website
 
+# uncommnet the pre-render section in _quarto.yml to update repository lists. Add new repositories to the MANUAL_PARTNER_REPO_LIST in scripts/fetch_workshops_data.py if necessary.
+#  pre-render:
+#    - python3 scripts/fetch_workshops_data.py
+
+  resources:
+    - data/**
+
 website:
   title: "C3G Training Catalog"
   navbar:
