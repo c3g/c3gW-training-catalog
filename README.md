@@ -1,6 +1,6 @@
 # c3gW-training-catalog
 
-> [!WARNING]
+> [WARNING]
 
 > **Under Construction:** The catalog is actively being developed, and workshop pages will be added progressively.
 
