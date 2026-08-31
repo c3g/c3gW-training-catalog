@@ -1,28 +1,439 @@
 ---
 title: "Workshops"
 ---
+<!-- This page indexes workshop repositories from the c3g GitHub organization and partners' GitHub repositories. The list data/workshops-data.json is created with the python script scripts/fetch_workshops_data.py. Edit the python script to include more partner repositories and uncomment the pre-render section in _quarto.yml to update this table. -->
 
-## Introduction to ...
+## C3G Workshops
+<!-- This page indexes workshop repositories from the [c3g GitHub organization](https://github.com/c3g).
+Only repositories whose names start with `c3gW` and include the `workshop` topic are included. -->
 
-Learn the basics of ...
+Our team has developed workshops to support skill development in computational genomics and bioinformatics. Each repository contains workshop materials, including slides, exercises, and datasets. The workshops are designed to be interactive and hands-on, providing learners with practical experience in using bioinformatics tools and techniques.
 
-- 🌐 Website: <>
-- 💻 GitHub: <>
+<div class="workshop-index-controls">
+<label for="workshopFilter">Filter workshops</label>
+<input id="workshopFilter" type="search" placeholder="Type to filter by name or description" />
+</div>
 
-## Introduction to ...
+<div id="workshopTopicFilters" class="workshop-topic-filters" aria-label="Filter by workshop topic"></div>
 
-Introduction to ...
+<div id="workshopStatus" class="workshop-index-status" aria-live="polite">Loading workshops...</div>
+<div id="workshopList" class="workshop-index-list"></div>
 
-- 🌐 Website: <>
-- 💻 GitHub: <>
+<script>
+	(async function () {
+		const normalizedPrefix = "c3gw";
+		const normalizedTopicTag = "workshop";
+		const defaultSuggestedCategoryTags = ["cancer", "rna-seq", "chip-seq", "metagenomics", "variant-calling", "single-cell", "epigenomics", "proteomics", "genome-assembly", "clinical"];
+		const statusEl = document.getElementById("workshopStatus");
+		const listEl = document.getElementById("workshopList");
+		const filterEl = document.getElementById("workshopFilter");
+		const topicFiltersEl = document.getElementById("workshopTopicFilters");
 
-##  Analysis
+		if (!statusEl || !listEl || !filterEl || !topicFiltersEl) {
+			console.error("Workshop index container elements are missing from the page.");
+			return;
+		}
 
-Analysis workflow ...
+		async function fetchCatalogData() {
+			const response = await fetch("./data/workshops-data.json", { cache: "no-store" });
 
-- 🌐 Website: <>
-- 💻 GitHub: <>
+			if (!response.ok) {
+				throw new Error(`Catalog data request failed with status ${response.status}`);
+			}
 
+			return response.json();
+		}
+
+		function getNonWorkshopTopics(repo) {
+			const topics = Array.isArray(repo.topics) ? repo.topics : [];
+			return topics.filter((topic) => topic !== normalizedTopicTag);
+		}
+
+		function hasWorkshopTopic(repo) {
+			const topics = Array.isArray(repo.topics) ? repo.topics : [];
+			return topics.some((topic) => String(topic).toLowerCase() === normalizedTopicTag);
+		}
+
+		function formatDate(isoDate) {
+			if (!isoDate) {
+				return "Unknown update date";
+			}
+
+			const parsed = new Date(isoDate);
+			return parsed.toLocaleDateString(undefined, {
+				year: "numeric",
+				month: "short",
+				day: "numeric"
+			});
+		}
+
+		function renderCards(items) {
+			if (items.length === 0) {
+				listEl.innerHTML = "";
+				statusEl.textContent = "No workshops match this filter.";
+				return;
+			}
+
+			const cards = items.map((repo) => {
+				const description = repo.description
+					? repo.description
+					: "No description provided.";
+				const homepage = repo.homepage && repo.homepage.trim() !== ""
+					? `<a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">Website</a>`
+					: "";
+				const tags = Array.isArray(repo.topics) ? repo.topics : [];
+				const tagsMarkup = tags.length > 0
+					? `<div class="workshop-tags">${tags.map((tag) => `<span class="workshop-tag">${tag}</span>`).join("")}</div>`
+					: "<div class=\"workshop-tags\"><span class=\"workshop-tag workshop-tag-empty\">untagged</span></div>";
+
+				return `
+					<article class="workshop-card">
+						<h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+						<p>${description}</p>
+						${tagsMarkup}
+						<div class="workshop-meta">
+							<span>Updated ${formatDate(repo.pushed_at)}</span>
+							<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">GitHub</a>
+							${homepage}
+						</div>
+					</article>
+				`;
+			});
+
+			listEl.innerHTML = cards.join("");
+			statusEl.textContent = `${items.length} workshop repositories found.`;
+		}
+
+		function buildTopicFilters(workshops, suggestedCategoryTags) {
+			const discoveredTopics = new Set();
+			const excludedTopicKeys = new Set(["training", "other"]);
+
+			workshops.forEach((repo) => {
+				getNonWorkshopTopics(repo).forEach((topic) => discoveredTopics.add(topic));
+			});
+
+			suggestedCategoryTags.forEach((topic) => discoveredTopics.add(topic));
+
+			const topicButtons = [
+				{ key: "all", label: "All" },
+				...Array.from(discoveredTopics)
+					.filter((topic) => !excludedTopicKeys.has(topic))
+					.sort()
+					.map((topic) => ({
+					key: topic,
+					label: topic
+				}))
+			];
+
+			topicFiltersEl.innerHTML = topicButtons
+				.map((topic) => `<button type="button" class="workshop-topic-button" data-topic-key="${topic.key}">${topic.label}</button>`)
+				.join("");
+		}
+
+		function filterByTopic(workshops, topicKey) {
+			if (topicKey === "all") {
+				return workshops;
+			}
+
+			if (topicKey === "other") {
+				return workshops.filter((repo) => getNonWorkshopTopics(repo).length === 0);
+			}
+
+			return workshops.filter((repo) => getNonWorkshopTopics(repo).includes(topicKey));
+		}
+
+		function setActiveTopicButton(topicKey) {
+			const buttons = topicFiltersEl.querySelectorAll(".workshop-topic-button");
+
+			buttons.forEach((button) => {
+				button.classList.toggle("is-active", button.dataset.topicKey === topicKey);
+			});
+		}
+
+		try {
+			const payload = await fetchCatalogData();
+			const suggestedCategoryTags = Array.isArray(payload.suggestedCategoryTags) && payload.suggestedCategoryTags.length > 0
+				? payload.suggestedCategoryTags
+				: defaultSuggestedCategoryTags;
+			const repos = Array.isArray(payload.mainWorkshops) ? payload.mainWorkshops : [];
+			const workshops = repos
+				.map((repo) => ({
+					...repo,
+					topics: Array.isArray(repo.topics)
+						? repo.topics.map((topic) => String(topic).toLowerCase())
+						: []
+				}))
+				.filter((repo) => String(repo.name || "").toLowerCase().startsWith(normalizedPrefix))
+				.filter((repo) => hasWorkshopTopic(repo))
+				.sort((a, b) => a.name.localeCompare(b.name));
+
+			buildTopicFilters(workshops, suggestedCategoryTags);
+
+			let selectedTopicKey = "all";
+
+			const applyFilters = () => {
+				const query = filterEl.value.trim().toLowerCase();
+				const topicFiltered = filterByTopic(workshops, selectedTopicKey);
+
+				const combined = query
+					? topicFiltered.filter((repo) => {
+						const haystack = `${repo.name} ${repo.description || ""}`.toLowerCase();
+						return haystack.includes(query);
+					})
+					: topicFiltered;
+
+				renderCards(combined);
+				setActiveTopicButton(selectedTopicKey);
+			};
+
+			applyFilters();
+
+			filterEl.addEventListener("input", () => {
+				applyFilters();
+			});
+
+			topicFiltersEl.addEventListener("click", (event) => {
+				const target = event.target;
+
+				if (!(target instanceof HTMLButtonElement)) {
+					return;
+				}
+
+				const nextTopicKey = target.dataset.topicKey;
+				if (!nextTopicKey) {
+					return;
+				}
+
+				selectedTopicKey = nextTopicKey;
+				applyFilters();
+			});
+		} catch (error) {
+			listEl.innerHTML = "";
+			statusEl.textContent = "Unable to load prebuilt workshop catalog data. Please ask a contributor to run the build again.";
+
+			console.error(error);
+		}
+	})();
+</script>
+
+## Partner Workshops {.partner-workshops-heading}
+C3G also collaborates with partner organizations to deliver workshops. This section highlights partner-led workshops in which C3G is involved. Although these workshops may not be hosted in the C3G GitHub organization, they remain relevant to our community.
+
+<!-- Partner repositories are configured at build time in `scripts/fetch_workshops_data.py`. -->
+
+<div class="workshop-index-controls">
+<label for="partnerWorkshopFilter">Filter partner workshops</label>
+<input id="partnerWorkshopFilter" type="search" placeholder="Type to filter by name or description" />
+</div>
+
+<div id="partnerWorkshopTopicFilters" class="workshop-topic-filters" aria-label="Filter partner workshops by topic"></div>
+
+<div id="partnerWorkshopStatus" class="workshop-index-status" aria-live="polite">Loading partner workshops...</div>
+<div id="partnerWorkshopList" class="workshop-index-list"></div>
+
+<script>
+	(async function () {
+		const topicTag = "workshop";
+		const normalizedTopicTag = topicTag.toLowerCase();
+		const defaultSuggestedCategoryTags = ["cancer", "rna-seq", "chip-seq", "metagenomics", "variant-calling", "single-cell", "epigenomics", "proteomics", "genome-assembly", "clinical"];
+		const statusEl = document.getElementById("partnerWorkshopStatus");
+		const listEl = document.getElementById("partnerWorkshopList");
+		const filterEl = document.getElementById("partnerWorkshopFilter");
+		const topicFiltersEl = document.getElementById("partnerWorkshopTopicFilters");
+
+		if (!statusEl || !listEl || !filterEl || !topicFiltersEl) {
+			console.error("Partner workshop index container elements are missing from the page.");
+			return;
+		}
+
+		async function fetchCatalogData() {
+			const response = await fetch("./data/workshops-data.json", { cache: "no-store" });
+
+			if (!response.ok) {
+				throw new Error(`Catalog data request failed with status ${response.status}`);
+			}
+
+			return response.json();
+		}
+
+		function getNonWorkshopTopics(repo) {
+			const topics = Array.isArray(repo.topics) ? repo.topics : [];
+			return topics.filter((topic) => topic !== normalizedTopicTag);
+		}
+
+		function formatDate(isoDate) {
+			if (!isoDate) {
+				return "Unknown update date";
+			}
+
+			const parsed = new Date(isoDate);
+			return parsed.toLocaleDateString(undefined, {
+				year: "numeric",
+				month: "short",
+				day: "numeric"
+			});
+		}
+
+		function renderCards(items) {
+			if (items.length === 0) {
+				listEl.innerHTML = "";
+				statusEl.textContent = "No partner workshops match this filter.";
+				return;
+			}
+
+			const cards = items.map((repo) => {
+				const description = repo.description
+					? repo.description
+					: "No description provided.";
+				const homepage = repo.homepage && repo.homepage.trim() !== ""
+					? `<a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">Website</a>`
+					: "";
+				const tags = Array.isArray(repo.topics) ? repo.topics : [];
+				const tagsMarkup = tags.length > 0
+					? `<div class="workshop-tags">${tags.map((tag) => `<span class="workshop-tag">${tag}</span>`).join("")}</div>`
+					: "<div class=\"workshop-tags\"><span class=\"workshop-tag workshop-tag-empty\">untagged</span></div>";
+
+				return `
+					<article class="workshop-card">
+						<h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.full_name || repo.name}</a></h3>
+						<p>${description}</p>
+						${tagsMarkup}
+						<div class="workshop-meta">
+							<span>Updated ${formatDate(repo.pushed_at)}</span>
+							<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">GitHub</a>
+							${homepage}
+						</div>
+					</article>
+				`;
+			});
+
+			listEl.innerHTML = cards.join("");
+			statusEl.textContent = `${items.length} partner workshop repositories found.`;
+		}
+
+		function buildTopicFilters(workshops, suggestedCategoryTags) {
+			const discoveredTopics = new Set();
+
+			workshops.forEach((repo) => {
+				getNonWorkshopTopics(repo).forEach((topic) => discoveredTopics.add(topic));
+			});
+
+			suggestedCategoryTags.forEach((topic) => discoveredTopics.add(topic));
+
+			const topicButtons = [
+				{ key: "all", label: "All" },
+				...Array.from(discoveredTopics)
+					.sort()
+					.map((topic) => ({
+						key: topic,
+						label: topic
+					}))
+			];
+
+			topicFiltersEl.innerHTML = topicButtons
+				.map((topic) => `<button type="button" class="workshop-topic-button" data-topic-key="${topic.key}">${topic.label}</button>`)
+				.join("");
+		}
+
+		function filterByTopic(workshops, topicKey) {
+			if (topicKey === "all") {
+				return workshops;
+			}
+
+			return workshops.filter((repo) => getNonWorkshopTopics(repo).includes(topicKey));
+		}
+
+		function setActiveTopicButton(topicKey) {
+			const buttons = topicFiltersEl.querySelectorAll(".workshop-topic-button");
+
+			buttons.forEach((button) => {
+				button.classList.toggle("is-active", button.dataset.topicKey === topicKey);
+			});
+		}
+
+		try {
+			const payload = await fetchCatalogData();
+			const manualPartnerRepoList = payload.source && Array.isArray(payload.source.manualPartnerRepoList)
+				? payload.source.manualPartnerRepoList
+				: [];
+			const suggestedCategoryTags = Array.isArray(payload.suggestedCategoryTags) && payload.suggestedCategoryTags.length > 0
+				? payload.suggestedCategoryTags
+				: defaultSuggestedCategoryTags;
+			const workshops = (Array.isArray(payload.partnerWorkshops) ? payload.partnerWorkshops : [])
+				.map((repo) => ({
+					...repo,
+					topics: Array.isArray(repo.topics)
+						? repo.topics.map((topic) => String(topic).toLowerCase())
+						: []
+				}));
+
+			if (manualPartnerRepoList.length === 0) {
+				statusEl.textContent = "No partner repositories configured yet. Add entries to MANUAL_PARTNER_REPO_LIST in scripts/fetch_workshops_data.py.";
+				listEl.innerHTML = "";
+				topicFiltersEl.innerHTML = "";
+				return;
+			}
+
+			buildTopicFilters(workshops, suggestedCategoryTags);
+
+			let selectedTopicKey = "all";
+
+			const applyFilters = () => {
+				const query = filterEl.value.trim().toLowerCase();
+				const topicFiltered = filterByTopic(workshops, selectedTopicKey);
+
+				const combined = query
+					? topicFiltered.filter((repo) => {
+						const haystack = `${repo.name} ${repo.full_name || ""} ${repo.description || ""}`.toLowerCase();
+						return haystack.includes(query);
+					})
+					: topicFiltered;
+
+				renderCards(combined);
+				setActiveTopicButton(selectedTopicKey);
+			};
+
+			applyFilters();
+
+			filterEl.addEventListener("input", () => {
+				applyFilters();
+			});
+
+			topicFiltersEl.addEventListener("click", (event) => {
+				const target = event.target;
+
+				if (!(target instanceof HTMLButtonElement)) {
+					return;
+				}
+
+				const nextTopicKey = target.dataset.topicKey;
+				if (!nextTopicKey) {
+					return;
+				}
+
+				selectedTopicKey = nextTopicKey;
+				applyFilters();
+			});
+		} catch (error) {
+			listEl.innerHTML = "";
+			statusEl.textContent = "Unable to load prebuilt partner workshop catalog data. Please ask a contributor to run the build again.";
+
+			console.error(error);
+		}
+	})();
+</script>
+
+
+
+## Workshop Registration
+To register and know more about upcoming workshops, please visit the
+<a href="https://computationalgenomics.ca/training-helpdesk/events/" target="_blank"
+   style="text-decoration:none;">
+  <span class="badge" style="background-color: #0c9b79; color:white;">
+    <i class="bi bi-calendar-check"></i>
+    C3G Events Page
+  </span>
+</a>
 
 ::: {.content-visible}
 <div style="margin-bottom: 1000px;"></div>

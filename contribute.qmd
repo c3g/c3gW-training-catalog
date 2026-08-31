@@ -1,9 +1,6 @@
 ---
 title: Contribute
 ---
-
-# Contributing
-
 We welcome contributions from C3G trainers and collaborators.
 
 ## Principles
@@ -17,8 +14,71 @@ We welcome contributions from C3G trainers and collaborators.
 
 1. Create a workshop repository.
 2. Assign a maintainer.
-3. Add workshop metadata.
-4. Add the workshop to the Hub.
+3. Add workshop metadata - materials, including slides, code,exercises, and datasets.
+4. Add the workshop to the catalog.
+
+## How to contribute a workshop
+
+This catalog is generated from GitHub metadata. To make sure your workshop appears on the [Workshops](workshops.qmd) page, follow the rules below.
+
+### For workshops in the C3G GitHub organization
+
+1. Create the repository in the [c3g organization](https://github.com/c3g).
+2. Name the repository with the `c3gW` prefix (example: `c3gW-intro-rnaseq`).
+3. Add the GitHub topic `workshop` (required).
+4. Add a clear description and, if available, a homepage URL.
+5. Add one or more category topics (recommended), such as:
+	- `rna-seq`
+	- `chip-seq`
+	- `metagenomics`
+	- `variant-calling`
+	- `single-cell`
+	- `epigenomics`
+	- `proteomics`
+	- `genome-assembly`
+	- `clinical`
+	- `cancer`
+
+If the repository name starts with `c3gW` and includes the `workshop` topic, it will be included automatically in the main workshop catalog.
+
+### For partner workshops outside the C3G organization
+
+Partner repositories are managed manually.
+
+1. Open `scripts/fetch_workshops_data.py`.
+2. Add the repository (`owner/repo`) to `MANUAL_PARTNER_REPO_LIST`.
+3. Ensure topics include `workshop`.
+4. If needed, add or override partner topics in `MANUAL_PARTNER_TOPIC_OVERRIDES`.
+
+## How to contribute a tutorial
+
+Tutorials are indexed from directories in the [c3g/c3gW-Tutorials](https://github.com/c3g/c3gW-Tutorials) repository.
+
+1. Create a new top-level tutorial directory in `c3g/c3gW-Tutorials`.
+2. Add a `README.md` inside that directory with these sections:
+	- `## Description`: brief summary of the tutorial content.
+	- `## Tags`: topic tags (for example `rna-seq`, `single-cell`, `variant-calling`).
+3. Open a pull request in `c3g/c3gW-Tutorials` and request review.
+
+Notes:
+
+- The tutorial catalog automatically adds the `tutorial` topic to each directory entry.
+- Tags from the `## Tags` section are normalized to lowercase and shown as tutorial filters in this site.
+- If a directory is missing `README.md` metadata, a fallback description is used.
+
+### Refresh the catalog data
+
+After adding or updating workshop repositories or tutorial directories:
+
+1. Run:
+
+```bash
+python3 scripts/fetch_workshops_data.py
+```
+
+2. Rebuild the site so the updated data is published.
+
+Tip: you can also enable the commented `pre-render` step in `_quarto.yml` to refresh workshop data automatically during site builds.
 
 
 ::: {.content-visible}
