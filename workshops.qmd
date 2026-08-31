@@ -3,10 +3,11 @@ title: "Workshops"
 ---
 <!-- This page indexes workshop repositories from the c3g GitHub organization and partners' GitHub repositories. The list data/workshops-data.json is created with the python script scripts/fetch_workshops_data.py. Edit the python script to include more partner repositories and uncomment the pre-render section in _quarto.yml to update this table. -->
 
-## Workshops Catalog
+## C3G Workshops
+<!-- This page indexes workshop repositories from the [c3g GitHub organization](https://github.com/c3g).
+Only repositories whose names start with `c3gW` and include the `workshop` topic are included. -->
 
-This page indexes workshop repositories from the [c3g GitHub organization](https://github.com/c3g).
-Only repositories whose names start with `c3gW` and include the `workshop` topic are included.
+Our team has developed workshops to support skill development in computational genomics and bioinformatics. Each repository contains workshop materials, including slides, exercises, and datasets. The workshops are designed to be interactive and hands-on, providing learners with practical experience in using bioinformatics tools and techniques.
 
 <div class="workshop-index-controls">
 <label for="workshopFilter">Filter workshops</label>
@@ -215,7 +216,7 @@ Only repositories whose names start with `c3gW` and include the `workshop` topic
 	})();
 </script>
 
-## Partner Workshops
+## Partner Workshops {.partner-workshops-heading}
 C3G also collaborates with partner organizations to deliver workshops. This section highlights partner-led workshops in which C3G is involved. Although these workshops may not be hosted in the C3G GitHub organization, they remain relevant to our community.
 
 <!-- Partner repositories are configured at build time in `scripts/fetch_workshops_data.py`. -->
@@ -425,7 +426,14 @@ C3G also collaborates with partner organizations to deliver workshops. This sect
 
 
 ## Workshop Registration
-To register and know more about upcoming workshops, please visit the [C3G Events Page](https://computationalgenomics.ca/training-helpdesk/events/).
+To register and know more about upcoming workshops, please visit the
+<a href="https://computationalgenomics.ca/training-helpdesk/events/" target="_blank"
+   style="text-decoration:none;">
+  <span class="badge" style="background-color: #0c9b79; color:white;">
+    <i class="bi bi-calendar-check"></i>
+    C3G Events Page
+  </span>
+</a>
 
 ::: {.content-visible}
 <div style="margin-bottom: 1000px;"></div>

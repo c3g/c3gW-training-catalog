@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-08-26T21:10:42.488964+00:00",
+  "generatedAt": "2026-08-28T13:45:58.315398+00:00",
   "source": {
     "organization": "c3g",
     "prefix": "c3gW",
     "requiredTopic": "workshop",
+    "tutorialRepository": "c3g/c3gW-Tutorials",
     "manualPartnerRepoList": [
       "QLS-MiCM/Introduction-to-RNA-seq",
       "QLS-MiCM/RNA-seq-Data-Processing"
@@ -70,6 +71,22 @@
       "topics": [
         "workshop",
         "rna-seq"
+      ]
+    }
+  ],
+  "tutorials": [
+    {
+      "name": "Survival_Analysis",
+      "full_name": "c3g/c3gW-Tutorials/Survival_Analysis",
+      "description": "This tutorial describes ...",
+      "homepage": "",
+      "html_url": "https://github.com/c3g/c3gW-Tutorials/tree/main/Survival_Analysis",
+      "pushed_at": "2026-08-28T13:37:24Z",
+      "path": "Survival_Analysis",
+      "topics": [
+        "tutorial",
+        "cancer",
+        "single-cell"
       ]
     }
   ]

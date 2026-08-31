@@ -5,10 +5,12 @@
 
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import base64
 from pathlib import Path
 from typing import Dict, List, Any
 from datetime import datetime, timezone
@@ -16,6 +18,9 @@ from datetime import datetime, timezone
 ORG = "c3g"
 PREFIX = "c3gW"
 WORKSHOP_TOPIC = "workshop"
+TUTORIAL_REPO_OWNER = "c3g"
+TUTORIAL_REPO_NAME = "c3gW-Tutorials"
+TUTORIAL_TOPIC = "tutorial"
 
 SUGGESTED_CATEGORY_TAGS = [
     "cancer",
@@ -39,6 +44,8 @@ MANUAL_PARTNER_TOPIC_OVERRIDES = {
     "QLS-MiCM/Introduction-to-RNA-seq": ["workshop", "rna-seq"],
     "QLS-MiCM/RNA-seq-Data-Processing": ["workshop", "rna-seq"],
 }
+
+TUTORIAL_DIR_TOPIC_OVERRIDES: Dict[str, List[str]] = {}
 
 
 def github_get(path: str) -> Any:
@@ -105,6 +112,49 @@ def fetch_repo_topics(owner: str, repo_name: str) -> List[str]:
     return normalize_topics(payload.get("names", []))
 
 
+def fetch_latest_commit_date_for_path(owner: str, repo_name: str, repo_path: str) -> str:
+    encoded_path = urllib.parse.quote(repo_path, safe="/")
+    payload = github_get(f"/repos/{owner}/{repo_name}/commits?path={encoded_path}&per_page=1")
+
+    if not isinstance(payload, list) or not payload:
+        return None
+
+    latest = payload[0] if isinstance(payload[0], dict) else {}
+    commit = latest.get("commit", {}) if isinstance(latest, dict) else {}
+
+    committer = commit.get("committer", {}) if isinstance(commit, dict) else {}
+    committer_date = committer.get("date") if isinstance(committer, dict) else None
+    if committer_date:
+        return str(committer_date)
+
+    author = commit.get("author", {}) if isinstance(commit, dict) else {}
+    author_date = author.get("date") if isinstance(author, dict) else None
+    if author_date:
+        return str(author_date)
+
+    return None
+
+
+def fetch_repo_text_file(owner: str, repo_name: str, file_path: str) -> str:
+    encoded_path = urllib.parse.quote(file_path, safe="/")
+    payload = github_get(f"/repos/{owner}/{repo_name}/contents/{encoded_path}")
+
+    if not isinstance(payload, dict):
+        return ""
+
+    encoded_content = payload.get("content", "")
+    if encoded_content:
+        decoded = base64.b64decode(str(encoded_content).encode("utf-8"), validate=False)
+        return decoded.decode("utf-8", errors="ignore")
+
+    download_url = payload.get("download_url", "")
+    if not download_url:
+        return ""
+
+    with urllib.request.urlopen(download_url) as response:
+        return response.read().decode("utf-8", errors="ignore")
+
+
 def fetch_org_repos() -> List[Dict[str, Any]]:
     repos: List[Dict[str, Any]] = []
     page = 1
@@ -169,6 +219,118 @@ def fetch_partner_workshops() -> List[Dict[str, Any]]:
     return sorted(workshops, key=lambda item: item["name"].lower())
 
 
+def extract_markdown_section(markdown_text: str, section_name: str) -> str:
+    lines = markdown_text.splitlines()
+    heading_pattern = re.compile(r"^\s{0,3}#{1,6}\s*" + re.escape(section_name) + r"\s*$", re.IGNORECASE)
+    any_heading_pattern = re.compile(r"^\s{0,3}#{1,6}\s+.+$")
+
+    start_idx = -1
+    for idx, line in enumerate(lines):
+        if heading_pattern.match(line):
+            start_idx = idx + 1
+            break
+
+    if start_idx < 0:
+        return ""
+
+    section_lines: List[str] = []
+    for line in lines[start_idx:]:
+        if any_heading_pattern.match(line):
+            break
+        section_lines.append(line)
+
+    return "\n".join(section_lines).strip()
+
+
+def parse_tutorial_readme_metadata(markdown_text: str) -> Dict[str, Any]:
+    description_block = extract_markdown_section(markdown_text, "Description")
+    tags_block = extract_markdown_section(markdown_text, "Tags")
+
+    description = " ".join(part.strip() for part in description_block.splitlines() if part.strip())
+
+    raw_tag_parts: List[str] = []
+    for line in tags_block.splitlines():
+        cleaned_line = re.sub(r"^\s*[-*+]\s+", "", line).strip()
+        if not cleaned_line:
+            continue
+        raw_tag_parts.extend(re.split(r"[,;/]", cleaned_line))
+
+    cleaned_tag_parts: List[str] = []
+    for token in raw_tag_parts:
+        cleaned_token = str(token).strip().lower()
+        cleaned_token = re.sub(r"^[^a-z0-9]+|[^a-z0-9]+$", "", cleaned_token)
+        cleaned_token = re.sub(r"\s+", "-", cleaned_token)
+        if cleaned_token:
+            cleaned_tag_parts.append(cleaned_token)
+
+    tags = normalize_topics(cleaned_tag_parts)
+
+    return {
+        "description": description,
+        "tags": tags,
+    }
+
+
+def fetch_tutorial_readme_metadata(directory_path: str) -> Dict[str, Any]:
+    readme_candidates = ["README.md", "readme.md", "README.MD"]
+
+    for candidate in readme_candidates:
+        readme_path = f"{directory_path}/{candidate}"
+        try:
+            markdown_text = fetch_repo_text_file(TUTORIAL_REPO_OWNER, TUTORIAL_REPO_NAME, readme_path)
+            if markdown_text.strip():
+                return parse_tutorial_readme_metadata(markdown_text)
+        except Exception:
+            continue
+
+    return {
+        "description": "",
+        "tags": [],
+    }
+
+
+def fetch_tutorial_directories() -> List[Dict[str, Any]]:
+    payload = github_get(f"/repos/{TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}/contents")
+
+    if not isinstance(payload, list):
+        return []
+
+    tutorials: List[Dict[str, Any]] = []
+    for entry in payload:
+        if not isinstance(entry, dict):
+            continue
+
+        if entry.get("type") != "dir":
+            continue
+
+        name = str(entry.get("name", "")).strip()
+        if not name:
+            continue
+        if name.startswith("."):
+            continue
+
+        readme_metadata = fetch_tutorial_readme_metadata(name)
+        last_updated = fetch_latest_commit_date_for_path(TUTORIAL_REPO_OWNER, TUTORIAL_REPO_NAME, name)
+        override_topics = TUTORIAL_DIR_TOPIC_OVERRIDES.get(name, [])
+        topics = merge_topics([TUTORIAL_TOPIC], readme_metadata.get("tags", []), override_topics)
+        description = str(readme_metadata.get("description", "")).strip()
+
+        tutorials.append(
+            {
+                "name": name,
+                "full_name": f"{TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}/{name}",
+                "description": description or f"Tutorial directory in {TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}.",
+                "homepage": "",
+                "html_url": entry.get("html_url", ""),
+                "pushed_at": last_updated,
+                "path": entry.get("path", name),
+                "topics": topics,
+            }
+        )
+
+    return sorted(tutorials, key=lambda item: item["name"].lower())
+
+
 def main() -> int:
     out_path = Path("data/workshops-data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -180,18 +342,20 @@ def main() -> int:
                 "organization": ORG,
                 "prefix": PREFIX,
                 "requiredTopic": WORKSHOP_TOPIC,
+                "tutorialRepository": f"{TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}",
                 "manualPartnerRepoList": MANUAL_PARTNER_REPO_LIST,
                 "suggestedCategoryTags": SUGGESTED_CATEGORY_TAGS,
             },
             "suggestedCategoryTags": SUGGESTED_CATEGORY_TAGS,
             "mainWorkshops": fetch_main_workshops(),
             "partnerWorkshops": fetch_partner_workshops(),
+            "tutorials": fetch_tutorial_directories(),
         }
 
         out_path.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
         print(
             "Wrote data/workshops-data.json "
-            f"(main={len(output['mainWorkshops'])}, partner={len(output['partnerWorkshops'])})"
+            f"(main={len(output['mainWorkshops'])}, partner={len(output['partnerWorkshops'])}, tutorials={len(output['tutorials'])})"
         )
     except Exception as err:
         if out_path.exists():
