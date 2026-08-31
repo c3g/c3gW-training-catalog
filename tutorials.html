@@ -127,9 +127,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#cancer" id="toc-cancer" class="nav-link active" data-scroll-target="#cancer">Cancer</a></li>
-  <li><a href="#rna-seq" id="toc-rna-seq" class="nav-link" data-scroll-target="#rna-seq">RNA-seq</a></li>
-  <li><a href="#variant-calling" id="toc-variant-calling" class="nav-link" data-scroll-target="#variant-calling">Variant calling</a></li>
+  <li><a href="#tutorials-catalog" id="toc-tutorials-catalog" class="nav-link active" data-scroll-target="#tutorials-catalog">Tutorials Catalog</a></li>
   </ul>
 <div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://computationalgenomics.ca/"><i class="bi bi-globe"></i>C3G website</a></li><li><a href="https://github.com/c3g"><i class="bi bi-github"></i>GitHub</a></li><li><a href="https://www.linkedin.com/company/canadian-centre-for-computational-genomics/posts/?feedView=all"><i class="bi bi-linkedin"></i>LinkedIn</a></li></ul></div></nav>
 </nav>
@@ -159,26 +157,205 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="cancer" class="level2">
-<h2 class="anchored" data-anchor-id="cancer">Cancer</h2>
-<ol type="1">
-<li>Introduction to …</li>
-<li>Analysis workflow …</li>
-</ol>
-</section>
-<section id="rna-seq" class="level2">
-<h2 class="anchored" data-anchor-id="rna-seq">RNA-seq</h2>
-<ol type="1">
-<li>Introduction to …</li>
-<li>Analysis workflow …</li>
-</ol>
-</section>
-<section id="variant-calling" class="level2">
-<h2 class="anchored" data-anchor-id="variant-calling">Variant calling</h2>
-<ol type="1">
-<li>Introduction to …</li>
-<li>Analysis workflow …</li>
-</ol>
+<p>C3G tutorials provide accessible, hands-on guidance for navigating computational tools, methods and workflows in genomics and bioinformatics.</p>
+<section id="tutorials-catalog" class="level2">
+<h2 class="anchored" data-anchor-id="tutorials-catalog">Tutorials Catalog</h2>
+<p>This page indexes tutorial directories from the <a href="https://github.com/c3g/c3gW-Tutorials">c3g/c3gW-Tutorials</a> repository.</p>
+<div class="workshop-index-controls">
+<p><label for="tutorialFilter">Filter tutorials</label> <input id="tutorialFilter" type="search" placeholder="Type to filter by name or description"></p>
+</div>
+<div id="tutorialTopicFilters" class="workshop-topic-filters" aria-label="Filter by tutorial topic">
+
+</div>
+<div id="tutorialStatus" class="workshop-index-status" aria-live="polite">
+Loading tutorials…
+</div>
+<div id="tutorialList" class="workshop-index-list">
+
+</div>
+<script>
+    (async function () {
+        const tutorialTopicTag = "tutorial";
+        const statusEl = document.getElementById("tutorialStatus");
+        const listEl = document.getElementById("tutorialList");
+        const filterEl = document.getElementById("tutorialFilter");
+        const topicFiltersEl = document.getElementById("tutorialTopicFilters");
+
+        if (!statusEl || !listEl || !filterEl || !topicFiltersEl) {
+            console.error("Tutorial index container elements are missing from the page.");
+            return;
+        }
+
+        async function fetchCatalogData() {
+            const response = await fetch("./data/workshops-data.json", { cache: "no-store" });
+
+            if (!response.ok) {
+                throw new Error(`Catalog data request failed with status ${response.status}`);
+            }
+
+            return response.json();
+        }
+
+        function getNonTutorialTopics(item) {
+            const topics = Array.isArray(item.topics) ? item.topics : [];
+            return topics.filter((topic) => topic !== tutorialTopicTag);
+        }
+
+        function formatDate(isoDate) {
+            if (!isoDate) {
+                return "Unknown update date";
+            }
+
+            const parsed = new Date(isoDate);
+            return parsed.toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            });
+        }
+
+        function renderCards(items) {
+            if (items.length === 0) {
+                listEl.innerHTML = "";
+                statusEl.textContent = "No tutorials match this filter.";
+                return;
+            }
+
+            const cards = items.map((item) => {
+                const description = item.description
+                    ? item.description
+                    : "No description provided.";
+                const tags = Array.isArray(item.topics) ? item.topics : [];
+                const tagsMarkup = tags.length > 0
+                    ? `<div class="workshop-tags">${tags.map((tag) => `<span class="workshop-tag">${tag}</span>`).join("")}</div>`
+                    : "<div class=\"workshop-tags\"><span class=\"workshop-tag workshop-tag-empty\">untagged</span></div>";
+
+                return `
+                    <article class="workshop-card">
+                        <h3><a href="${item.html_url}" target="_blank" rel="noopener noreferrer">${item.name}</a></h3>
+                        <p>${description}</p>
+                        ${tagsMarkup}
+                        <div class="workshop-meta">
+                            <span>Updated ${formatDate(item.pushed_at)}</span>
+                            <a href="${item.html_url}" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        </div>
+                    </article>
+                `;
+            });
+
+            listEl.innerHTML = cards.join("");
+            statusEl.textContent = `${items.length} tutorial directories found.`;
+        }
+
+        function buildTopicFilters(items, suggestedCategoryTags) {
+            const discoveredTopics = new Set();
+
+            items.forEach((item) => {
+                getNonTutorialTopics(item).forEach((topic) => discoveredTopics.add(topic));
+            });
+
+            suggestedCategoryTags.forEach((topic) => discoveredTopics.add(topic));
+
+            const topicButtons = [
+                { key: "all", label: "All" },
+                ...Array.from(discoveredTopics)
+                    .sort()
+                    .map((topic) => ({
+                        key: topic,
+                        label: topic
+                    }))
+            ];
+
+            topicFiltersEl.innerHTML = topicButtons
+                .map((topic) => `<button type="button" class="workshop-topic-button" data-topic-key="${topic.key}">${topic.label}</button>`)
+                .join("");
+        }
+
+        function filterByTopic(items, topicKey) {
+            if (topicKey === "all") {
+                return items;
+            }
+
+            return items.filter((item) => getNonTutorialTopics(item).includes(topicKey));
+        }
+
+        function setActiveTopicButton(topicKey) {
+            const buttons = topicFiltersEl.querySelectorAll(".workshop-topic-button");
+
+            buttons.forEach((button) => {
+                button.classList.toggle("is-active", button.dataset.topicKey === topicKey);
+            });
+        }
+
+        try {
+            const payload = await fetchCatalogData();
+            const suggestedCategoryTags = Array.isArray(payload.suggestedCategoryTags)
+                ? payload.suggestedCategoryTags
+                : [];
+            const tutorials = (Array.isArray(payload.tutorials) ? payload.tutorials : [])
+                .map((item) => ({
+                    ...item,
+                    topics: Array.isArray(item.topics)
+                        ? item.topics.map((topic) => String(topic).toLowerCase())
+                        : []
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name));
+
+            if (tutorials.length === 0) {
+                statusEl.textContent = "No tutorial directories found. Run python3 scripts/fetch_workshops_data.py and rebuild the site.";
+                listEl.innerHTML = "";
+                topicFiltersEl.innerHTML = "";
+                return;
+            }
+
+            buildTopicFilters(tutorials, suggestedCategoryTags);
+
+            let selectedTopicKey = "all";
+
+            const applyFilters = () => {
+                const query = filterEl.value.trim().toLowerCase();
+                const topicFiltered = filterByTopic(tutorials, selectedTopicKey);
+
+                const combined = query
+                    ? topicFiltered.filter((item) => {
+                        const haystack = `${item.name} ${item.description || ""} ${item.path || ""}`.toLowerCase();
+                        return haystack.includes(query);
+                    })
+                    : topicFiltered;
+
+                renderCards(combined);
+                setActiveTopicButton(selectedTopicKey);
+            };
+
+            applyFilters();
+
+            filterEl.addEventListener("input", () => {
+                applyFilters();
+            });
+
+            topicFiltersEl.addEventListener("click", (event) => {
+                const target = event.target;
+
+                if (!(target instanceof HTMLButtonElement)) {
+                    return;
+                }
+
+                const nextTopicKey = target.dataset.topicKey;
+                if (!nextTopicKey) {
+                    return;
+                }
+
+                selectedTopicKey = nextTopicKey;
+                applyFilters();
+            });
+        } catch (error) {
+            listEl.innerHTML = "";
+            statusEl.textContent = "Unable to load tutorial catalog data. Please ask a contributor to run the build again.";
+
+            console.error(error);
+        }
+    })();
+</script>
 <div style="margin-bottom: 1000px;">
 
 </div>

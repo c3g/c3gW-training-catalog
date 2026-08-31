@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-08-28T13:45:58.315398+00:00",
+  "source": {
+    "organization": "c3g",
+    "prefix": "c3gW",
+    "requiredTopic": "workshop",
+    "tutorialRepository": "c3g/c3gW-Tutorials",
+    "manualPartnerRepoList": [
+      "QLS-MiCM/Introduction-to-RNA-seq",
+      "QLS-MiCM/RNA-seq-Data-Processing"
+    ],
+    "suggestedCategoryTags": [
+      "cancer",
+      "rna-seq",
+      "chip-seq",
+      "metagenomics",
+      "variant-calling",
+      "single-cell",
+      "epigenomics",
+      "proteomics",
+      "genome-assembly",
+      "clinical"
+    ]
+  },
+  "suggestedCategoryTags": [
+    "cancer",
+    "rna-seq",
+    "chip-seq",
+    "metagenomics",
+    "variant-calling",
+    "single-cell",
+    "epigenomics",
+    "proteomics",
+    "genome-assembly",
+    "clinical"
+  ],
+  "mainWorkshops": [
+    {
+      "name": "c3gW-training-catalog",
+      "full_name": "c3g/c3gW-training-catalog",
+      "description": "Central hub for C3G workshops, training materials, and educational resources.",
+      "homepage": "https://c3g.github.io/c3gW-training-catalog/",
+      "html_url": "https://github.com/c3g/c3gW-training-catalog",
+      "pushed_at": "2026-08-24T17:59:43Z",
+      "topics": [
+        "training",
+        "workshop"
+      ]
+    }
+  ],
+  "partnerWorkshops": [
+    {
+      "name": "Introduction-to-RNA-seq",
+      "full_name": "QLS-MiCM/Introduction-to-RNA-seq",
+      "description": "",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/Introduction-to-RNA-seq",
+      "pushed_at": "2026-08-13T13:23:46Z",
+      "topics": [
+        "workshop",
+        "rna-seq"
+      ]
+    },
+    {
+      "name": "RNA-seq-Data-Processing",
+      "full_name": "QLS-MiCM/RNA-seq-Data-Processing",
+      "description": "",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/RNA-seq-Data-Processing",
+      "pushed_at": "2026-08-13T13:24:53Z",
+      "topics": [
+        "workshop",
+        "rna-seq"
+      ]
+    }
+  ],
+  "tutorials": [
+    {
+      "name": "Survival_Analysis",
+      "full_name": "c3g/c3gW-Tutorials/Survival_Analysis",
+      "description": "This tutorial describes ...",
+      "homepage": "",
+      "html_url": "https://github.com/c3g/c3gW-Tutorials/tree/main/Survival_Analysis",
+      "pushed_at": "2026-08-28T13:37:24Z",
+      "path": "Survival_Analysis",
+      "topics": [
+        "tutorial",
+        "cancer",
+        "single-cell"
+      ]
+    }
+  ]
+}

@@ -4,98 +4,105 @@
     "href": "tutorials.html",
     "title": "Tutorials",
     "section": "",
-    "text": "Introduction to …\nAnalysis workflow …"
+    "text": "C3G tutorials provide accessible, hands-on guidance for navigating computational tools, methods and workflows in genomics and bioinformatics."
   },
   {
-    "objectID": "tutorials.html#cancer",
-    "href": "tutorials.html#cancer",
+    "objectID": "tutorials.html#tutorials-catalog",
+    "href": "tutorials.html#tutorials-catalog",
     "title": "Tutorials",
-    "section": "",
-    "text": "Introduction to …\nAnalysis workflow …"
-  },
-  {
-    "objectID": "tutorials.html#rna-seq",
-    "href": "tutorials.html#rna-seq",
-    "title": "Tutorials",
-    "section": "RNA-seq",
-    "text": "RNA-seq\n\nIntroduction to …\nAnalysis workflow …"
-  },
-  {
-    "objectID": "tutorials.html#variant-calling",
-    "href": "tutorials.html#variant-calling",
-    "title": "Tutorials",
-    "section": "Variant calling",
-    "text": "Variant calling\n\nIntroduction to …\nAnalysis workflow …"
+    "section": "Tutorials Catalog",
+    "text": "Tutorials Catalog\nThis page indexes tutorial directories from the c3g/c3gW-Tutorials repository.\n\nFilter tutorials \n\n\n\n\n\nLoading tutorials…"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "C3G training catalog",
     "section": "",
-    "text": "Welcome to the C3G Training Catalog.\nThis website serves as the central catalog of workshops, learning materials, and training resources developed and maintained by C3G.\n\n\n\nWorkshop catalog\nLearning resources\nContribution guidelines\n\n\n\n\nThe catalog is being developed and workshop pages will be added progressively."
+    "text": "WarningCurrent status\n\n\n\nThe catalog is being developed and workshop pages will be added progressively. Please check back later for new content and updates."
   },
   {
-    "objectID": "index.html#what-youll-find-here",
-    "href": "index.html#what-youll-find-here",
+    "objectID": "index.html#discover-the-catalog",
+    "href": "index.html#discover-the-catalog",
     "title": "C3G training catalog",
-    "section": "",
-    "text": "Workshop catalog\nLearning resources\nContribution guidelines"
+    "section": "Discover the Catalog",
+    "text": "Discover the Catalog\n\n\nFind Training Faster\nUse searchable catalogs with topic filters to discover workshops and tutorials relevant to your project.\n\n\nTrack Fresh Content\nSee the latest update dates for tutorial directories and keep up with evolving learning material.\n\n\nContribute Clearly\nFollow practical contribution guidelines to publish new workshop and tutorial resources in the catalog."
   },
   {
-    "objectID": "index.html#current-status",
-    "href": "index.html#current-status",
+    "objectID": "index.html#browse-availible-workshops-and-tutorials",
+    "href": "index.html#browse-availible-workshops-and-tutorials",
     "title": "C3G training catalog",
-    "section": "",
-    "text": "The catalog is being developed and workshop pages will be added progressively."
+    "section": "Browse availible workshops and tutorials",
+    "text": "Browse availible workshops and tutorials\n\n\nWorkshops\nSearchable catalog of C3G and partner workshop repositories.\n\n\nTutorials\nTutorial directory catalog sourced from c3g/c3gW-Tutorials.\n\n\nContribute\nNaming, metadata, and update workflow for contributors."
+  },
+  {
+    "objectID": "index.html#stay-connected",
+    "href": "index.html#stay-connected",
+    "title": "C3G training catalog",
+    "section": "Stay Connected",
+    "text": "Stay Connected\nJoin the C3G mailing list to stay informed about new training opportunities, workshops, tutorials, and events in bioinformatics, life sciences, and computational genomics.\nSubscribe to our newsletter"
   },
   {
     "objectID": "workshops.html",
     "href": "workshops.html",
     "title": "Workshops",
     "section": "",
-    "text": "Learn the basics of …\n\n🌐 Website: &lt;&gt;\n💻 GitHub: &lt;&gt;"
+    "text": "Our team has developed workshops to support skill development in computational genomics and bioinformatics. Each repository contains workshop materials, including slides, exercises, and datasets. The workshops are designed to be interactive and hands-on, providing learners with practical experience in using bioinformatics tools and techniques.\n\nFilter workshops \n\n\n\n\n\nLoading workshops…"
   },
   {
-    "objectID": "workshops.html#introduction-to",
-    "href": "workshops.html#introduction-to",
+    "objectID": "workshops.html#c3g-workshops",
+    "href": "workshops.html#c3g-workshops",
     "title": "Workshops",
     "section": "",
-    "text": "Learn the basics of …\n\n🌐 Website: &lt;&gt;\n💻 GitHub: &lt;&gt;"
+    "text": "Our team has developed workshops to support skill development in computational genomics and bioinformatics. Each repository contains workshop materials, including slides, exercises, and datasets. The workshops are designed to be interactive and hands-on, providing learners with practical experience in using bioinformatics tools and techniques.\n\nFilter workshops \n\n\n\n\n\nLoading workshops…"
   },
   {
-    "objectID": "workshops.html#introduction-to-1",
-    "href": "workshops.html#introduction-to-1",
+    "objectID": "workshops.html#partner-workshops",
+    "href": "workshops.html#partner-workshops",
     "title": "Workshops",
-    "section": "Introduction to …",
-    "text": "Introduction to …\nIntroduction to …\n\n🌐 Website: &lt;&gt;\n💻 GitHub: &lt;&gt;"
+    "section": "Partner Workshops",
+    "text": "Partner Workshops\nC3G also collaborates with partner organizations to deliver workshops. This section highlights partner-led workshops in which C3G is involved. Although these workshops may not be hosted in the C3G GitHub organization, they remain relevant to our community.\n\n\nFilter partner workshops \n\n\n\n\n\nLoading partner workshops…"
   },
   {
-    "objectID": "workshops.html#analysis",
-    "href": "workshops.html#analysis",
+    "objectID": "workshops.html#workshop-registration",
+    "href": "workshops.html#workshop-registration",
     "title": "Workshops",
-    "section": "Analysis",
-    "text": "Analysis\nAnalysis workflow …\n\n🌐 Website: &lt;&gt;\n💻 GitHub: &lt;&gt;"
+    "section": "Workshop Registration",
+    "text": "Workshop Registration\nTo register and know more about upcoming workshops, please visit the    C3G Events Page"
   },
   {
     "objectID": "contribute.html",
     "href": "contribute.html",
     "title": "Contribute",
     "section": "",
-    "text": "We welcome contributions from C3G trainers and collaborators.\n\n\n\nOne maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials\n\n\n\n\n\nCreate a workshop repository.\nAssign a maintainer.\nAdd workshop metadata.\nAdd the workshop to the Hub."
+    "text": "We welcome contributions from C3G trainers and collaborators."
   },
   {
     "objectID": "contribute.html#principles",
     "href": "contribute.html#principles",
     "title": "Contribute",
-    "section": "",
-    "text": "One maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials"
+    "section": "Principles",
+    "text": "Principles\n\nOne maintainer per workshop\nShared ownership through the C3G organization\nPeer review through pull requests\nSustainable and reusable teaching materials"
   },
   {
     "objectID": "contribute.html#new-workshop-workflow",
     "href": "contribute.html#new-workshop-workflow",
     "title": "Contribute",
-    "section": "",
-    "text": "Create a workshop repository.\nAssign a maintainer.\nAdd workshop metadata.\nAdd the workshop to the Hub."
+    "section": "New workshop workflow",
+    "text": "New workshop workflow\n\nCreate a workshop repository.\nAssign a maintainer.\nAdd workshop metadata - materials, including slides, code,exercises, and datasets.\nAdd the workshop to the catalog."
+  },
+  {
+    "objectID": "contribute.html#how-to-contribute-a-workshop",
+    "href": "contribute.html#how-to-contribute-a-workshop",
+    "title": "Contribute",
+    "section": "How to contribute a workshop",
+    "text": "How to contribute a workshop\nThis catalog is generated from GitHub metadata. To make sure your workshop appears on the Workshops page, follow the rules below.\n\nFor workshops in the C3G GitHub organization\n\nCreate the repository in the c3g organization.\nName the repository with the c3gW prefix (example: c3gW-intro-rnaseq).\nAdd the GitHub topic workshop (required).\nAdd a clear description and, if available, a homepage URL.\nAdd one or more category topics (recommended), such as:\n\nrna-seq\nchip-seq\nmetagenomics\nvariant-calling\nsingle-cell\nepigenomics\nproteomics\ngenome-assembly\nclinical\ncancer\n\n\nIf the repository name starts with c3gW and includes the workshop topic, it will be included automatically in the main workshop catalog.\n\n\nFor partner workshops outside the C3G organization\nPartner repositories are managed manually.\n\nOpen scripts/fetch_workshops_data.py.\nAdd the repository (owner/repo) to MANUAL_PARTNER_REPO_LIST.\nEnsure topics include workshop.\nIf needed, add or override partner topics in MANUAL_PARTNER_TOPIC_OVERRIDES."
+  },
+  {
+    "objectID": "contribute.html#how-to-contribute-a-tutorial",
+    "href": "contribute.html#how-to-contribute-a-tutorial",
+    "title": "Contribute",
+    "section": "How to contribute a tutorial",
+    "text": "How to contribute a tutorial\nTutorials are indexed from directories in the c3g/c3gW-Tutorials repository.\n\nCreate a new top-level tutorial directory in c3g/c3gW-Tutorials.\nAdd a README.md inside that directory with these sections:\n\n## Description: brief summary of the tutorial content.\n## Tags: topic tags (for example rna-seq, single-cell, variant-calling).\n\nOpen a pull request in c3g/c3gW-Tutorials and request review.\n\nNotes:\n\nThe tutorial catalog automatically adds the tutorial topic to each directory entry.\nTags from the ## Tags section are normalized to lowercase and shown as tutorial filters in this site.\nIf a directory is missing README.md metadata, a fallback description is used.\n\n\nRefresh the catalog data\nAfter adding or updating workshop repositories or tutorial directories:\n\nRun:\n\npython3 scripts/fetch_workshops_data.py\n\nRebuild the site so the updated data is published.\n\nTip: you can also enable the commented pre-render step in _quarto.yml to refresh workshop data automatically during site builds."
   },
   {
     "objectID": "about.html",
