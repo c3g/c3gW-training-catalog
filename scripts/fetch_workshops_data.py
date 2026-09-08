@@ -21,6 +21,7 @@ WORKSHOP_TOPIC = "workshop"
 TUTORIAL_REPO_OWNER = "c3g"
 TUTORIAL_REPO_NAME = "c3gW-Tutorials"
 TUTORIAL_TOPIC = "tutorial"
+TUTORIAL_PAGES_BASE_URL = f"https://{TUTORIAL_REPO_OWNER}.github.io/{TUTORIAL_REPO_NAME}"
 
 SUGGESTED_CATEGORY_TAGS = [
     "cancer",
@@ -245,8 +246,16 @@ def extract_markdown_section(markdown_text: str, section_name: str) -> str:
 def parse_tutorial_readme_metadata(markdown_text: str) -> Dict[str, Any]:
     description_block = extract_markdown_section(markdown_text, "Description")
     tags_block = extract_markdown_section(markdown_text, "Tags")
+    main_tutorial_block = extract_markdown_section(markdown_text, "Main_tutorial")
 
     description = " ".join(part.strip() for part in description_block.splitlines() if part.strip())
+    main_tutorial = ""
+
+    for line in main_tutorial_block.splitlines():
+        candidate = line.strip()
+        if candidate:
+            main_tutorial = candidate
+            break
 
     raw_tag_parts: List[str] = []
     for line in tags_block.splitlines():
@@ -268,7 +277,18 @@ def parse_tutorial_readme_metadata(markdown_text: str) -> Dict[str, Any]:
     return {
         "description": description,
         "tags": tags,
+        "main_tutorial": main_tutorial,
     }
+
+
+def build_tutorial_homepage(directory_path: str, main_tutorial: str) -> str:
+    cleaned_main_tutorial = str(main_tutorial).strip().lstrip("/")
+    if not cleaned_main_tutorial:
+        return ""
+
+    encoded_directory = urllib.parse.quote(directory_path.strip("/"), safe="/")
+    encoded_main_tutorial = urllib.parse.quote(cleaned_main_tutorial, safe="/")
+    return f"{TUTORIAL_PAGES_BASE_URL}/{encoded_directory}/{encoded_main_tutorial}"
 
 
 def fetch_tutorial_readme_metadata(directory_path: str) -> Dict[str, Any]:
@@ -314,13 +334,14 @@ def fetch_tutorial_directories() -> List[Dict[str, Any]]:
         override_topics = TUTORIAL_DIR_TOPIC_OVERRIDES.get(name, [])
         topics = merge_topics([TUTORIAL_TOPIC], readme_metadata.get("tags", []), override_topics)
         description = str(readme_metadata.get("description", "")).strip()
+        homepage = build_tutorial_homepage(name, readme_metadata.get("main_tutorial", ""))
 
         tutorials.append(
             {
                 "name": name,
                 "full_name": f"{TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}/{name}",
                 "description": description or f"Tutorial directory in {TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}.",
-                "homepage": "https://html-preview.github.io/?url=" + entry.get("html_url", ""),
+            "homepage": homepage or entry.get("html_url", ""),
                 "html_url": entry.get("html_url", ""),
                 "pushed_at": last_updated,
                 "path": entry.get("path", name),
