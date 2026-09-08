@@ -320,7 +320,7 @@ def fetch_tutorial_directories() -> List[Dict[str, Any]]:
                 "name": name,
                 "full_name": f"{TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}/{name}",
                 "description": description or f"Tutorial directory in {TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}.",
-                "homepage": "",
+                "homepage": "https://html-preview.github.io/?url=" + entry.get("html_url", ""),
                 "html_url": entry.get("html_url", ""),
                 "pushed_at": last_updated,
                 "path": entry.get("path", name),

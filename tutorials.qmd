@@ -77,7 +77,7 @@ This page indexes tutorial directories from the [c3g/c3gW-Tutorials](https://git
 
 				return `
 					<article class="workshop-card">
-						<h3><a href="${item.html_url}" target="_blank" rel="noopener noreferrer">${item.name}</a></h3>
+						<h3><a href="${item.homepage}" target="_blank" rel="noopener noreferrer">${item.name}</a></h3>
 						<p>${description}</p>
 						${tagsMarkup}
 						<div class="workshop-meta">
