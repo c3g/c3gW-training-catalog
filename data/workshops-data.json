@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T20:37:54.198864+00:00",
+  "generatedAt": "2026-10-15T15:32:33.644965+00:00",
   "source": {
     "organization": "c3g",
     "prefix": "c3gW",
@@ -41,7 +41,7 @@
       "description": "Central hub for C3G workshops, training materials, and educational resources.",
       "homepage": "https://c3g.github.io/c3gW-training-catalog/",
       "html_url": "https://github.com/c3g/c3gW-training-catalog",
-      "pushed_at": "2026-09-08T20:49:48Z",
+      "pushed_at": "2026-10-14T20:40:34Z",
       "topics": [
         "training",
         "workshop"
@@ -79,9 +79,9 @@
       "name": "Pseudobulk",
       "full_name": "c3g/c3gW-Tutorials/Pseudobulk",
       "description": "This tutorial provides instruction on how to turn single-cell RNA-seq data into a bulk-style count table with pseudobulk aggregation.",
-      "homepage": "https://c3g.github.io/c3gW-Tutorials/Pseudobulk/Pseudobulk_tutorial.html",
+      "homepage": "https://c3g.github.io/c3gW-Tutorials/Pseudobulk/pseudobulk_tutorial.html",
       "html_url": "https://github.com/c3g/c3gW-Tutorials/tree/main/Pseudobulk",
-      "pushed_at": "2026-10-14T20:34:45Z",
+      "pushed_at": "2026-10-15T15:30:48Z",
       "path": "Pseudobulk",
       "topics": [
         "tutorial",
