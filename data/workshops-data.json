@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T16:01:13.047593+00:00",
+  "generatedAt": "2026-11-03T16:07:54.625638+00:00",
   "source": {
     "organization": "c3g",
     "prefix": "c3gW",
@@ -20,13 +20,7 @@
     "suggestedCategoryTags": [
       "cancer",
       "rna-seq",
-      "chip-seq",
-      "metagenomics",
       "variant-calling",
-      "single-cell",
-      "epigenomics",
-      "proteomics",
-      "genome-assembly",
       "clinical",
       "data-visualization"
     ]
@@ -34,13 +28,7 @@
   "suggestedCategoryTags": [
     "cancer",
     "rna-seq",
-    "chip-seq",
-    "metagenomics",
     "variant-calling",
-    "single-cell",
-    "epigenomics",
-    "proteomics",
-    "genome-assembly",
     "clinical",
     "data-visualization"
   ],
@@ -51,7 +39,7 @@
       "description": "Central hub for C3G workshops, training materials, and educational resources.",
       "homepage": "https://c3g.github.io/c3gW-training-catalog/",
       "html_url": "https://github.com/c3g/c3gW-training-catalog",
-      "pushed_at": "2026-10-15T15:33:33Z",
+      "pushed_at": "2026-11-03T16:04:42Z",
       "topics": [
         "training",
         "workshop"
