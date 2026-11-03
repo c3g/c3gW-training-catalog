@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T15:32:33.644965+00:00",
+  "generatedAt": "2026-11-03T16:01:13.047593+00:00",
   "source": {
     "organization": "c3g",
     "prefix": "c3gW",
@@ -7,7 +7,15 @@
     "tutorialRepository": "c3g/c3gW-Tutorials",
     "manualPartnerRepoList": [
       "QLS-MiCM/Introduction-to-RNA-seq",
-      "QLS-MiCM/RNA-seq-Data-Processing"
+      "QLS-MiCM/RNA-seq-Data-Processing",
+      "QLS-MiCM/Statistical-Foundations-of-RNA-seq",
+      "QLS-MiCM/Differential-Gene-Expression-Analysis",
+      "QLS-MiCM/HPC_Nextflow_GenPipes",
+      "bioinformaticsdotca/CAN_TorMon-2610",
+      "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-Python",
+      "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-R",
+      "QLS-MiCM/Fall-2026-Bootcamp-Building-figures-with-Inkscape",
+      "QLS-MiCM/intro-to-latex"
     ],
     "suggestedCategoryTags": [
       "cancer",
@@ -19,7 +27,8 @@
       "epigenomics",
       "proteomics",
       "genome-assembly",
-      "clinical"
+      "clinical",
+      "data-visualization"
     ]
   },
   "suggestedCategoryTags": [
@@ -32,7 +41,8 @@
     "epigenomics",
     "proteomics",
     "genome-assembly",
-    "clinical"
+    "clinical",
+    "data-visualization"
   ],
   "mainWorkshops": [
     {
@@ -41,7 +51,7 @@
       "description": "Central hub for C3G workshops, training materials, and educational resources.",
       "homepage": "https://c3g.github.io/c3gW-training-catalog/",
       "html_url": "https://github.com/c3g/c3gW-training-catalog",
-      "pushed_at": "2026-10-14T20:40:34Z",
+      "pushed_at": "2026-10-15T15:33:33Z",
       "topics": [
         "training",
         "workshop"
@@ -49,6 +59,91 @@
     }
   ],
   "partnerWorkshops": [
+    {
+      "name": "CAN_TorMon-2610",
+      "full_name": "bioinformaticsdotca/CAN_TorMon-2610",
+      "description": "Cancer Analysis Workshop 2026",
+      "homepage": "",
+      "html_url": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610",
+      "pushed_at": "2026-10-28T14:01:45Z",
+      "topics": [
+        "workshop",
+        "cancer",
+        "variant-calling"
+      ]
+    },
+    {
+      "name": "Differential-Gene-Expression-Analysis",
+      "full_name": "QLS-MiCM/Differential-Gene-Expression-Analysis",
+      "description": "",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/Differential-Gene-Expression-Analysis",
+      "pushed_at": "2026-09-25T14:17:05Z",
+      "topics": [
+        "workshop",
+        "rna-seq"
+      ]
+    },
+    {
+      "name": "Fall-2026-Bootcamp-Building-figures-with-Inkscape",
+      "full_name": "QLS-MiCM/Fall-2026-Bootcamp-Building-figures-with-Inkscape",
+      "description": "This hands-on workshop will teach participants how to use Inkscape to transform a collection of independent plots into a polished, publication-ready figure.",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/Fall-2026-Bootcamp-Building-figures-with-Inkscape",
+      "pushed_at": "2026-10-29T13:57:07Z",
+      "topics": [
+        "workshop",
+        "data-visualization"
+      ]
+    },
+    {
+      "name": "Fall-2026-Bootcamp-Data-Visualization-in-Python",
+      "full_name": "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-Python",
+      "description": "Data Visualization in Python",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-Python",
+      "pushed_at": "2026-10-26T13:58:11Z",
+      "topics": [
+        "workshop",
+        "data-visualization"
+      ]
+    },
+    {
+      "name": "Fall-2026-Bootcamp-Data-Visualization-in-R",
+      "full_name": "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-R",
+      "description": "",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-R",
+      "pushed_at": "2026-10-27T17:45:38Z",
+      "topics": [
+        "workshop",
+        "data-visualization"
+      ]
+    },
+    {
+      "name": "HPC_Nextflow_GenPipes",
+      "full_name": "QLS-MiCM/HPC_Nextflow_GenPipes",
+      "description": "",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/HPC_Nextflow_GenPipes",
+      "pushed_at": "2026-09-25T14:17:17Z",
+      "topics": [
+        "workshop",
+        "rna-seq"
+      ]
+    },
+    {
+      "name": "intro-to-latex",
+      "full_name": "QLS-MiCM/intro-to-latex",
+      "description": "Workshop on scientific writing, images, drawings and graphics in LaTeX",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/intro-to-latex",
+      "pushed_at": "2026-10-30T03:39:41Z",
+      "topics": [
+        "workshop",
+        "data-visualization"
+      ]
+    },
     {
       "name": "Introduction-to-RNA-seq",
       "full_name": "QLS-MiCM/Introduction-to-RNA-seq",
@@ -68,6 +163,18 @@
       "homepage": "",
       "html_url": "https://github.com/QLS-MiCM/RNA-seq-Data-Processing",
       "pushed_at": "2026-09-25T14:17:06Z",
+      "topics": [
+        "workshop",
+        "rna-seq"
+      ]
+    },
+    {
+      "name": "Statistical-Foundations-of-RNA-seq",
+      "full_name": "QLS-MiCM/Statistical-Foundations-of-RNA-seq",
+      "description": "",
+      "homepage": "",
+      "html_url": "https://github.com/QLS-MiCM/Statistical-Foundations-of-RNA-seq",
+      "pushed_at": "2026-09-25T14:17:07Z",
       "topics": [
         "workshop",
         "rna-seq"
