@@ -34,16 +34,34 @@ SUGGESTED_CATEGORY_TAGS = [
     "proteomics",
     "genome-assembly",
     "clinical",
+    "data-visualization",
 ]
 
 MANUAL_PARTNER_REPO_LIST = [
     "QLS-MiCM/Introduction-to-RNA-seq",
     "QLS-MiCM/RNA-seq-Data-Processing",
+    "QLS-MiCM/Statistical-Foundations-of-RNA-seq",
+    "QLS-MiCM/Differential-Gene-Expression-Analysis",
+    "QLS-MiCM/HPC_Nextflow_GenPipes",
+    "bioinformaticsdotca/CAN_TorMon-2610",
+    "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-Python",
+    "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-R",
+    "QLS-MiCM/Fall-2026-Bootcamp-Building-figures-with-Inkscape",
+    "QLS-MiCM/intro-to-latex",
+
 ]
 
 MANUAL_PARTNER_TOPIC_OVERRIDES = {
     "QLS-MiCM/Introduction-to-RNA-seq": ["workshop", "rna-seq"],
     "QLS-MiCM/RNA-seq-Data-Processing": ["workshop", "rna-seq"],
+    "QLS-MiCM/Statistical-Foundations-of-RNA-seq": ["workshop", "rna-seq"],
+    "QLS-MiCM/Differential-Gene-Expression-Analysis": ["workshop", "rna-seq"],
+    "QLS-MiCM/HPC_Nextflow_GenPipes": ["workshop", "rna-seq"],
+    "bioinformaticsdotca/CAN_TorMon-2610": ["workshop", "cancer", "variant-calling"],
+    "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-Python": ["workshop", "data-visualization"],
+    "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-R": ["workshop", "data-visualization"],
+    "QLS-MiCM/Fall-2026-Bootcamp-Building-figures-with-Inkscape": ["workshop", "data-visualization"],
+    "QLS-MiCM/intro-to-latex": ["workshop", "data-visualization"],
 }
 
 TUTORIAL_DIR_TOPIC_OVERRIDES: Dict[str, List[str]] = {}

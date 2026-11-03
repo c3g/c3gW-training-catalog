@@ -23,7 +23,19 @@ Our team has developed workshops to support skill development in computational g
 	(async function () {
 		const normalizedPrefix = "c3gw";
 		const normalizedTopicTag = "workshop";
-		const defaultSuggestedCategoryTags = ["cancer", "rna-seq", "chip-seq", "metagenomics", "variant-calling", "single-cell", "epigenomics", "proteomics", "genome-assembly", "clinical"];
+		const defaultSuggestedCategoryTags = 
+		["cancer", 
+		"rna-seq", 
+		// "chip-seq", 
+		// "metagenomics", 
+		"variant-calling", 
+		// "single-cell", 
+		// "epigenomics", 
+		// "proteomics", 
+		// "genome-assembly", 
+		"clinical",
+		"data-visualization",
+		];
 		const statusEl = document.getElementById("workshopStatus");
 		const listEl = document.getElementById("workshopList");
 		const filterEl = document.getElementById("workshopFilter");
