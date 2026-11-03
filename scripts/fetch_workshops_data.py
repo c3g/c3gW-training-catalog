@@ -204,7 +204,7 @@ def fetch_main_workshops() -> List[Dict[str, Any]]:
                 normalized = normalize_repo(repo, topics)
                 if normalized["name"].lower().startswith(PREFIX.lower()) and WORKSHOP_TOPIC in normalized["topics"]:
                     workshops.append(normalized)
-            return sorted(workshops, key=lambda item: item["name"].lower())
+            return sorted(workshops, key=lambda item: item["name"].lower(), reverse=True)
     except Exception as exc:
         print(f"Search API failed, using org repo fallback: {exc}", file=sys.stderr)
 
@@ -235,7 +235,7 @@ def fetch_partner_workshops() -> List[Dict[str, Any]]:
             MANUAL_PARTNER_TOPIC_OVERRIDES.get(full_name, []),
         )
         workshops.append(normalize_repo(repo, topics))
-    return sorted(workshops, key=lambda item: item["name"].lower())
+    return list(reversed(workshops))
 
 
 def extract_markdown_section(markdown_text: str, section_name: str) -> str:

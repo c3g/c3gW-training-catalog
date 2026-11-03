@@ -448,6 +448,7 @@ h1, h2, h3, h4, h5, h6,
 .workshop-card h3 {
     margin: 0 0 10px;
     font-size: 1.3rem;
+    overflow-wrap: anywhere;
 }
 
 .workshop-card h3 a {
