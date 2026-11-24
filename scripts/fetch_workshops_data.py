@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch workshop catalog data at build time and write it to a local JSON file."""
 
-# Add new partner repositories to the MANUAL_PARTNER_REPO_LIST constant below in the org/repo format. The list of main workshops is fetched automatically from the c3g GitHub organization.
+# Add partner repositories to MANUAL_PARTNER_REPO_LIST and standalone tutorials to MANUAL_TUTORIALS. Main workshops are fetched from the c3g GitHub organization.
 
 import json
 import os
@@ -65,6 +65,19 @@ MANUAL_PARTNER_TOPIC_OVERRIDES = {
 }
 
 TUTORIAL_DIR_TOPIC_OVERRIDES: Dict[str, List[str]] = {}
+
+MANUAL_TUTORIALS: List[Dict[str, Any]] = [
+    {
+        "name": "Genotyping using the Human Pangenome Reference",
+        "full_name": "cgroza/KU_tutorial_2023",
+        "description": "A hands-on tutorial on exploring the human pangenome graph, mapping whole-genome sequencing reads, and calling variants.",
+        "homepage": "https://zenodo.org/records/10794014",
+        "html_url": "https://github.com/cgroza/KU_tutorial_2023",
+        "pushed_at": None,
+        "path": "",
+        "topics": ["tutorial", "human-pangenome", "genome-graphs", "variant-calling"],
+    },
+]
 
 
 def github_get(path: str) -> Any:
@@ -367,6 +380,7 @@ def fetch_tutorial_directories() -> List[Dict[str, Any]]:
             }
         )
 
+    tutorials.extend(MANUAL_TUTORIALS)
     return sorted(tutorials, key=lambda item: item["name"].lower())
 
 
@@ -383,6 +397,7 @@ def main() -> int:
                 "requiredTopic": WORKSHOP_TOPIC,
                 "tutorialRepository": f"{TUTORIAL_REPO_OWNER}/{TUTORIAL_REPO_NAME}",
                 "manualPartnerRepoList": MANUAL_PARTNER_REPO_LIST,
+                "manualTutorials": [tutorial["full_name"] for tutorial in MANUAL_TUTORIALS],
                 "suggestedCategoryTags": SUGGESTED_CATEGORY_TAGS,
             },
             "suggestedCategoryTags": SUGGESTED_CATEGORY_TAGS,
