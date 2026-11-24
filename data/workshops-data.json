@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T21:08:35.572713+00:00",
+  "generatedAt": "2026-11-24T15:24:38.545190+00:00",
   "source": {
     "organization": "c3g",
     "prefix": "c3gW",
@@ -16,6 +16,9 @@
       "QLS-MiCM/Fall-2026-Bootcamp-Data-Visualization-in-R",
       "QLS-MiCM/Fall-2026-Bootcamp-Building-figures-with-Inkscape",
       "QLS-MiCM/intro-to-latex"
+    ],
+    "manualTutorials": [
+      "cgroza/KU_tutorial_2023"
     ],
     "suggestedCategoryTags": [
       "cancer",
@@ -39,7 +42,7 @@
       "description": "Central hub for C3G workshops, training materials, and educational resources.",
       "homepage": "https://c3g.github.io/c3gW-training-catalog/",
       "html_url": "https://github.com/c3g/c3gW-training-catalog",
-      "pushed_at": "2026-11-03T16:09:23Z",
+      "pushed_at": "2026-11-03T21:12:59Z",
       "topics": [
         "training",
         "workshop"
@@ -170,6 +173,21 @@
     }
   ],
   "tutorials": [
+    {
+      "name": "Genotyping using the Human Pangenome Reference",
+      "full_name": "cgroza/KU_tutorial_2023",
+      "description": "A hands-on tutorial on exploring the human pangenome graph, mapping whole-genome sequencing reads, and calling variants.",
+      "homepage": "https://zenodo.org/records/10794014",
+      "html_url": "https://github.com/cgroza/KU_tutorial_2023",
+      "pushed_at": null,
+      "path": "",
+      "topics": [
+        "tutorial",
+        "human-pangenome",
+        "genome-graphs",
+        "variant-calling"
+      ]
+    },
     {
       "name": "Pseudobulk",
       "full_name": "c3g/c3gW-Tutorials/Pseudobulk",
